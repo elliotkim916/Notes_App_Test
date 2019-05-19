@@ -76,6 +76,7 @@ export default class Notes extends React.Component {
         },
         method: 'DELETE'
       })
+      .catch(err => console.log(err))
     );
   }
 
