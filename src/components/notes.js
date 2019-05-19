@@ -79,14 +79,14 @@ export default class Notes extends React.Component {
     );
   }
 
-  filterInput(e) {
-    this.setState({filterId: e.target.value});
-  }
   titleInput(e) {
     this.setState({title: e.target.value});
   }
   bodyInput(e) {
     this.setState({body: e.target.value});
+  }
+  filterInput(e) {
+    this.setState({filterId: e.target.value});
   }
 
   logOut() {
