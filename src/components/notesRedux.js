@@ -20,11 +20,14 @@ export class NotesRedux extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(fetchNotes());
+    this.input.focus();
   }
 
   onSubmit(e) {
     e.preventDefault();
     this.props.dispatch(addNewNote(this.state.title, this.state.body));
+    this.setState({title: ''});
+    this.setState({body: ''});
   }
 
   titleInput(e) {
@@ -72,8 +75,8 @@ export class NotesRedux extends React.Component {
         <button type="button" onClick={() => this.logOut()}>Log Out</button>
         <form onSubmit={e => this.onSubmit(e)}>
           <h2>Notes Form</h2>
-          <input type="text" placeholder="Enter note title" onChange={e => this.titleInput(e)}></input><br/><br/>
-          <textarea placeholder="Enter note body" onChange={e => this.bodyInput(e)}></textarea><br/><br/>
+          <input type="text" placeholder="Enter note title" onChange={e => this.titleInput(e)} value={this.state.title} ref={input => this.input = input}></input><br/><br/>
+          <textarea placeholder="Enter note body" onChange={e => this.bodyInput(e)} value={this.state.body}></textarea><br/><br/>
           <button type="submit">Create New Note</button><br/><br/><br/><br/>
         </form>
 

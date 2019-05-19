@@ -16,6 +16,7 @@ export default class Notes extends React.Component {
 
   componentDidMount() {
     this.getNotes();
+    this.input.focus();
   }
 
   getNotes() {
@@ -61,7 +62,11 @@ export default class Notes extends React.Component {
         method: 'POST'
       })
       .then(res => res.json())
-      .then(note => this.setState({notes: [note, ...this.state.notes]}))
+      .then(note => {
+        this.setState({notes: [note, ...this.state.notes]})
+        this.setState({title: ''});
+        this.setState({body: ''});
+      })
       .catch(err => console.log(err))
     );
   }
@@ -125,8 +130,8 @@ export default class Notes extends React.Component {
         <button type="button" onClick={() => this.logOut()}>Log Out</button>
         <form onSubmit={e => this.onSubmit(e)}>
           <h2>Notes Form</h2>
-          <input type="text" placeholder="Enter note title" onChange={e => this.titleInput(e)}></input><br/><br/>
-          <textarea placeholder="Enter note body" onChange={e => this.bodyInput(e)}></textarea><br/><br/>
+          <input type="text" placeholder="Enter note title" onChange={e => this.titleInput(e)} value={this.state.title} ref={input => this.input = input}></input><br/><br/>
+          <textarea placeholder="Enter note body" onChange={e => this.bodyInput(e)} value={this.state.body}></textarea><br/><br/>
           <button type="submit">Create New Note</button><br/><br/><br/><br/>
         </form>
 
