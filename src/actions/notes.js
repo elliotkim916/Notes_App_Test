@@ -54,7 +54,7 @@ export const fetchNoteById = id => dispatch => {
     })
     .then(res => res.json())
     .then(note => dispatch(getNoteById(note)))
-    .then(err => dispatch(notesError(err)))
+    .catch(err => dispatch(notesError(err)))
   );
 }
 
